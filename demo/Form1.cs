@@ -1,16 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Web.Script.Serialization;
-using System.Web;
 using Leaf.xNet;
+using System.Text.Json;
 
 namespace demo
 {
@@ -96,68 +88,84 @@ namespace demo
 
         private void button2_Click(object sender, EventArgs e)
         {
-            textBox1.Text = ""
-;           textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
-            textBox5.Text = "";
-            textBox6.Text = "";
+            t_id.Text = ""
+;           t_date.Text = "";
+            t_email.Text = "";
+            t_name.Text = "";
+            t_itog.Text = "";
+            t_ls.Text = "";
+            check_id.Text = "";
+            richTextBox1.Text = "";
         }
 
         string sendMsg (string pid, string pdate, string pemail, string pls, string pitog, string pname)
         {
             string n = "";
-            var par = new RequestParams();
-
-            par["PAY_ID"] = pid;
-            par["PAY_DATE"] = pdate;
-            par["PAY_EMAIL"] = pemail;
-            par["PAY_LS"] = pls;
-            par["PAY_ITOG"] = pitog;
-            par["PAY_NAME"] = pname;
-            par["PAY_ACTION"] = "REC";
-            var req  = new Leaf.xNet.HttpRequest();
-            var resp = req.Get("https://pay.pay-ok.org/demo/?REQ=", par);
-            par = new RequestParams();
-            par["PAQY_ID"] = pid;
-            par["PAY_ACTION"] = "GET_INFO";
-            resp = req.Get("https://pay.pay-ok.org/demo/?REQ=", par);
-            n = resp.ToString();
-           
-            /*try
+            try
             {
-                using (var request = 
-                {
-                    var urlParams = new RequestParams();
-                    urlParams.Add();
+                
 
-                    request.AddHeader("Accept", "application/json");
-                    request.Get("", urlParams);
-                    request.AddHeader("Content-Type:", "application/json");
-                    request.AddHeader("Authorization", "Bearer " + textBox56.Text);
-
-                    string content = request.Post("https://edge.qiwi.com/sinap/api/v2/terms/99/payments", urlParams).ToString();
-                    textBox58.Text = content;
-                }
+                var par = new RequestParams();
+          
+                par["REQ"] = "{\"PAY_ID\":\"" +pid+"\",\"PAY_DATE\":\""+pdate+"\", \"PAY_EMAIL\":\""+pemail+"\",\"PAY_LS\": \""+pls+"\", \"PAY_ITOG\": \""+pitog+"\", \"PAY_NAME\" : \""+pname+"\",\"PAY_ACTION\": \"REG\" }";
+                
+                var req = new Leaf.xNet.HttpRequest();
+                var resp = req.Get("https://pay.pay-ok.org/demo/", par);
+                
+                n = resp.ToString();
             }
             catch (Exception e)
             {
-                richTextBox1.Text = e.StackTrace;
-            }*/
+                n = e.StackTrace;
+            }           
             return n;
-
         }
+
+        string checkStatus (string pid)
+        {
+            string check = "";
+           
+            try
+            { 
+                string response = "";
+                var par = new RequestParams();
+                par["REQ"] = "{\"PAY_ID\":\"" + pid + "\",\"PAY_ACTION\": \"GET_INFO\" }";
+               
+                var req = new Leaf.xNet.HttpRequest();
+                var resp = req.Get("https://pay.pay-ok.org/demo/", par);
+                int t = 9;
+                Check c = new Check();
+                int u = 0;
+                response = resp.ToString();
+                check = c.PrintCheck(response);
+            }
+            catch (Exception e)
+            {
+                check = "ошибка";
+            }
+            return check;
+        }
+
+    
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string pid = textBox1.Text;
-            string pdate = textBox2.Text;
-            string pemail = textBox3.Text;
-            string pls = textBox4.Text;
-            string pitog = textBox5.Text;
-            string pname = textBox6.Text;
+            string pid = t_id.Text;
+            string pdate = t_date.Text;
+            string pemail = t_email.Text;
+            string pls = t_ls.Text;
+            string pitog = t_itog.Text;
+            string pname = t_name.Text;
             string resp = sendMsg(pid, pdate, pemail, pls, pitog, pname);
             richTextBox1.Text = resp;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string t_id = check_id.Text;
+            string resp = checkStatus(t_id);
+            richTextBox1.Text = resp;
+
         }
     }
 }

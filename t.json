@@ -1,0 +1,20 @@
+{
+    "STATUS": {
+        "params": {
+            "payment_id": "122233",
+            "date": "2020-01-30 10:16:27",
+            "lsc": "724144",
+            "contacts": "vvv@na.ru",
+            "positions": "a:1:{i:0;a:3:{s:9:\"PAY_COUNT\";i:1;s:9:\"PAY_PRICE\";d:2.54;s:8:\"PAY_NAME\";s:38:\"Оплата таймер л\/с 724144\";}}",
+            "type": "",
+            "taxationSystem": "",
+            "paymentType": "",
+            "uploadfile": "",
+            "uploaddate": "0000-00-00 00:00:00",
+            "OD_STATUS": "OK",
+            "OD_PARAMS": "{\"id\":\"122233\",\"deviceSN\":\"1234567890\",\"deviceRN\":\"1234567890\",\"fsNumber\":\"1234567890\",\"ofdName\":\"Такском\",\"ofdWebsite\":\"www.taxcom.ru\",\"ofdinn\":\"7704211201\",\"fnsWebsite\":\"www.nalog.ru\",\"companyINN\":\"3302000000\",\"documentNumber\":940,\"shiftNumber\":555,\"documentIndex\":823,\"processedAt\":\"2021-10-23MSK14:30:32\",\"fp\":\"1234567890\",\"callbackUrl\":null}",
+            "OD_TIMESTAMP": "2021-10-23 14:30:32",
+            "OD_KASSE_NUMBER": ""
+        }
+    }
+}

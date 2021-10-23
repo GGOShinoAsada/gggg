@@ -1,0 +1,25 @@
+https://pay.pay-ok.org/demo/?REQ={
+
+"PAY_ID": "122233",
+
+"PAY_ACTION": "REG",
+
+"PAY_DATE": "2020-01-30 10:16:27",
+
+"PAY_EMAIL": "vvv@na.ru",
+
+"PAY_LS": "724144",
+
+"PAY_ITOG":"254",
+
+"PAY_NAME": "Оплата таймер л/с 724144"
+
+}
+
+https://pay.pay-ok.org/demo/?REQ={
+
+"PAY_ID": "123456789",
+
+"PAY_ACTION": "GET_INFO"
+
+}
